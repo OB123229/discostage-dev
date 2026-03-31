@@ -3,6 +3,7 @@
 A web app for discovering local artists and upcoming music events.
 
 ---
+```
 discostage-dev/
   index.html        ← open app here
   server.py         ← backend API
@@ -23,6 +24,7 @@ discostage-dev/
       explore.js    ← video feed
       search.js     ← search artists
       profile.js    ← artist profile
+```
 
 
 ## Launch the App
