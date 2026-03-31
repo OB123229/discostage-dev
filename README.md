@@ -3,7 +3,7 @@
 A web app for discovering local artists and upcoming music events.
 
 ---
-discostage-dev/
+discostage-dev
   index.html        ← open app here
   server.py         ← backend API
   Logo.png          ← app logo
