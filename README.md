@@ -3,7 +3,26 @@
 A web app for discovering local artists and upcoming music events.
 
 ---
-
+discostage-dev/
+  index.html        ← open app here
+  server.py         ← backend API
+  Logo.png          ← app logo
+  js/
+    app.js          ← core app, auth, router
+    styles.js       ← colors and fonts
+    data.js         ← mock data
+    components/
+      ui.js         ← shared buttons, inputs
+      tabbar.js     ← bottom navigation
+    pages/
+      welcome.js    ← splash screen
+      auth.js       ← login / signup
+      location.js   ← college town picker
+      role.js       ← fan vs artist
+      home.js       ← discover events
+      explore.js    ← video feed
+      search.js     ← search artists
+      profile.js    ← artist profile
 
 ## Launch the App
 
