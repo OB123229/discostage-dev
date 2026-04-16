@@ -1,4 +1,5 @@
 import React from 'react';
+import { TouchableOpacity, View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -16,9 +17,32 @@ import HomeScreen from '../screens/HomeScreen';
 import ExploreScreen from '../screens/ExploreScreen';
 import SearchScreen from '../screens/SearchScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import UploadScreen from '../screens/UploadScreen';
+import AnalyticsScreen from '../screens/AnalyticsScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+function PostTabButton({ onPress }) {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={styles.postTabBtn}
+      activeOpacity={0.85}
+    >
+      <View style={styles.postBtnShadow}>
+        <LinearGradient
+          colors={['#C084FC', '#7B2FBE', '#5B1F9E']}
+          style={styles.postBtnGradient}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+        >
+          <Ionicons name="add" size={28} color="white" />
+        </LinearGradient>
+      </View>
+    </TouchableOpacity>
+  );
+}
 
 function MainTabs() {
   return (
@@ -32,13 +56,14 @@ function MainTabs() {
           height: 64,
           paddingBottom: 10,
           paddingTop: 8,
+          overflow: 'visible',
         },
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.textMuted,
         tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
         tabBarIcon: ({ focused, color, size }) => {
           const icons = {
-            Home: focused ? 'home' : 'home-outline',
+            Events: focused ? 'calendar' : 'calendar-outline',
             Explore: focused ? 'compass' : 'compass-outline',
             Search: focused ? 'search' : 'search-outline',
             Profile: focused ? 'person' : 'person-outline',
@@ -47,8 +72,16 @@ function MainTabs() {
         },
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Events" component={HomeScreen} />
       <Tab.Screen name="Explore" component={ExploreScreen} />
+      <Tab.Screen
+        name="Post"
+        component={UploadScreen}
+        options={{
+          tabBarLabel: () => null,
+          tabBarButton: (props) => <PostTabButton {...props} />,
+        }}
+      />
       <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
@@ -84,9 +117,36 @@ export default function AppNavigator() {
             <Stack.Screen name="Role" component={RoleScreen} />
           </>
         ) : (
-          <Stack.Screen name="Main" component={MainTabs} />
+          <>
+            <Stack.Screen name="Main" component={MainTabs} />
+            <Stack.Screen name="Analytics" component={AnalyticsScreen} />
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  postTabBtn: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  postBtnShadow: {
+    marginBottom: 18,
+    shadowColor: '#A855F7',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.65,
+    shadowRadius: 12,
+    elevation: 10,
+    borderRadius: 28,
+  },
+  postBtnGradient: {
+    width: 54,
+    height: 54,
+    borderRadius: 27,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
